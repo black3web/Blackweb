@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جلال - المطور المحترف</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, 'Tajawal', sans-serif;
+        }
+
+        :root {
+            --primary-black: #0a0a0a;
+            --primary-red: #8b0000;
+            --neon-red: #ff073a;
+            --neon-dark-red: #b30000;
+            --glass-bg: rgba(10, 10, 10, 0.85);
+            --glass-border: rgba(255, 7, 58, 0.25);
+            --glow-red: rgba(255, 7, 58, 0.7);
+            --text-primary: #ffffff;
+            --text-secondary: #f0f0f0;
+            --shadow-deep: 0 20px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        body {
+            background: var(--primary-black);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(255, 7, 58, 0.15) 0%, transparent 40%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
+        }
+
+        .geometric-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.4;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 7, 58, 0.05) 20px, rgba(255, 7, 58, 0.05) 40px),
+                repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(139, 0, 0, 0.05) 30px, rgba(139, 0, 0, 0.05) 60px);
+        }
+
+        #stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .star {
+            position: absolute;
+            background: var(--neon-red);
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite alternate;
+            box-shadow: 0 0 8px var(--neon-red);
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.2; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .light-beam {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .beam {
+            position: absolute;
+            width: 300px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
+            filter: blur(1px);
+            animation: beamMove 8s linear infinite;
+        }
+
+        .beam:nth-child(1) { top: 20%; animation-delay: 0s; }
+        .beam:nth-child(2) { top: 40%; animation-delay: 2s; }
+        .beam:nth-child(3) { top: 60%; animation-delay: 4s; }
+        .beam:nth-child(4) { top: 80%; animation-delay: 6s; }
+
+        @keyframes beamMove {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateX(100vw) rotate(45deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 2rem auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .glass-bubble {
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 28px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 
+                var(--shadow-deep),
+                inset 0 0 80px rgba(139, 0, 0, 0.15),
+                inset 0 0 40px rgba(255, 7, 58, 0.1),
+                0 0 50px rgba(255, 7, 58, 0.2);
+            overflow: hidden;
+            position: relative;
+            animation: bubbleFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes bubbleFloat {
+            0%, 100% { transform: translateY(0) rotate(0.2deg); }
+            50% { transform: translateY(-8px) rotate(-0.2deg); }
+        }
+
+        .glass-bubble::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 28px;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--neon-red), transparent 30%, transparent 70%, var(--primary-red));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            animation: borderGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes borderGlow {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        .banner-container {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.05) contrast(1.1);
+            transition: transform 8s ease;
+        }
+
+        .banner-container:hover .banner {
+            transform: scale(1.04);
+        }
+
+        .banner-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem;
+            background: linear-gradient(transparent, rgba(10, 10, 10, 0.8));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner-text {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(10, 10, 10, 0.5);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 7, 58, 0.2);
+        }
+
+        .profile-section {
+            position: relative;
+            margin-top: -80px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            z-index: 20;
+        }
+
+        .profile-img-container {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--neon-red), var(--primary-red));
+            position: relative;
+            animation: profileGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes profileGlow {
+            0% { box-shadow: 0 0 25px var(--glow-red); }
+            100% { box-shadow: 0 0 40px rgba(255, 7, 58, 0.8); }
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        .profile-info {
+            text-align: center;
+            padding: 0 2.5rem 2rem;
+        }
+
+        .profile-name {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--neon-red), var(--primary-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 5px 15px rgba(255, 7, 58, 0.3);
+        }
+
+        .profile-title {
+            font-size: 1.1rem;
+            color: var(--neon-red);
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+
+        .profile-description {
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 7, 58, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        .links-section {
+            padding: 0 2.5rem 2.5rem;
+        }
+
+        .links-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-bottom: 0.5rem;
+        }
+
+        .links-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-red), var(--primary-red), transparent);
+            border-radius: 1px;
+        }
+
+        .links-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .links-row {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .link-app {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 7, 58, 0.15);
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            width: 160px;
+        }
+
+        .link-app::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 7, 58, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+
+        .link-app:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 7, 58, 0.4);
+            box-shadow: 
+                0 8px 20px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(255, 7, 58, 0.25);
+        }
+
+        .link-app:hover::before {
+            opacity: 1;
+            transform: rotate(45deg) translate(20%, 20%);
+        }
+
+        .app-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--neon-red), var(--primary-red));
+            color: white;
+            position: relative;
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+
+        .link-app:hover .app-icon {
+            transform: scale(1.08) rotate(3deg);
+        }
+
+        .app-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .app-handle {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+        }
+
+        .website-url {
+            color: var(--neon-red);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 7, 58, 0.1);
+            border: 1px solid rgba(255, 7, 58, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .website-url:hover {
+            background: rgba(255, 7, 58, 0.2);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 7, 58, 0.3);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-image {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(255, 7, 58, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-image {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 7, 58, 0.3);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem auto;
+            }
+            
+            .glass-bubble {
+                border-radius: 22px;
+            }
+            
+            .banner-container {
+                height: 240px;
+            }
+            
+            .profile-img-container {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .profile-section {
+                margin-top: -70px;
+            }
+            
+            .profile-info {
+                padding: 0 1.5rem 1.5rem;
+            }
+            
+            .profile-name {
+                font-size: 2rem;
+            }
+            
+            .profile-description {
+                padding: 1.2rem;
+                font-size: 0.95rem;
+            }
+            
+            .links-section {
+                padding: 0 1.5rem 1.5rem;
+            }
+            
+            .links-row {
+                gap: 1rem;
+            }
+            
+            .link-app {
+                width: 140px;
+                padding: 1rem 0.8rem;
+            }
+            
+            .app-icon {
+                width: 38px;
+                height: 38px;
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner-container {
+                height: 200px;
+            }
+            
+            .profile-img-container {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-section {
+                margin-top: -60px;
+            }
+            
+            .profile-name {
+                font-size: 1.8rem;
+            }
+            
+            .links-row {
+                justify-content: space-around;
+            }
+            
+            .link-app {
+                width: 130px;
+                padding: 0.9rem 0.6rem;
+            }
+            
+            .app-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--neon-red), var(--primary-red));
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(var(--primary-red), var(--neon-red));
+        }
+    </style>
+</head>
+<body>
+    <div class="geometric-background"></div>
+    <div id="stars-container"></div>
+    <div class="light-beam">
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+        <div class="beam"></div>
+    </div>
+    
+    <div class="modal-overlay" id="image-modal">
+        <div class="modal-close" id="modal-close">
+            <i class="fas fa-times"></i>
+        </div>
+        <img src="" alt="" class="modal-image" id="modal-image">
+    </div>
+    
+    <div class="container">
+        <div class="glass-bubble">
+            <div class="banner-container" id="banner">
+                <img src="https://iili.io/fb6SvS9.md.jpg" alt="بنر جلال" class="banner">
+                <div class="banner-overlay">
+                    <div class="banner-text">
+                        <i class="fas fa-expand-alt"></i>
+                        انقر للتكبير
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <div class="profile-img-container" id="profile-img">
+                    <img src="https://iili.io/fb64ziv.md.jpg" alt="صورة جلال الشخصية" class="profile-img">
+                </div>
+            </div>
+            
+            <section class="profile-info">
+                <h1 class="profile-name">جلال</h1>
+                <p class="profile-title">مطور برمجيات | مصمم واجهات</p>
+                <p class="profile-description">
+                    مطور ويب محترف متخصص في إنشاء تطبيقات ويب حديثة ومبتكرة. 
+                    أمتلك خبرة واسعة في تطوير حلول تقنية متكاملة تركز على تجربة المستخدم والأداء العالي.
+                    أهدف دائماً إلى دمج الجمالية مع الوظيفة في كل مشروع أقوم به.
+                </p>
+            </section>
+            
+            <section class="links-section">
+                <h2 class="links-title">التواصل</h2>
+                <div class="links-grid">
+                    <div class="links-row">
+                        <a href="https://t.me/szc_v" target="_blank" class="link-app">
+                            <div class="app-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="app-name">Telegram</div>
+                            <div class="app-handle">@szc_v</div>
+                        </a>
+                        
+                        <a href="https://t.me/swc_t" target="_blank" class="link-app">
+                            <div class="app-icon">
+                                <i class="fab fa-telegram-plane"></i>
+                            </div>
+                            <div class="app-name">القناة</div>
+                            <div class="app-handle">@swc_t</div>
+                        </a>
+                    </div>
+                    
+                    <div class="links-row">
+                        <a href="https://youtube.com/c/JalalTech" target="_blank" class="link-app">
+                            <div class="app-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="app-name">YouTube</div>
+                            <div class="app-handle">Jalal Tech</div>
+                        </a>
+                        
+                        <a href="https://instagram.com/jalal.dev" target="_blank" class="link-app">
+                            <div class="app-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="app-name">Instagram</div>
+                            <div class="app-handle">@jalal.dev</div>
+                        </a>
+                        
+                        <a href="https://pinterest.com/jalaldesigns" target="_blank" class="link-app">
+                            <div class="app-icon">
+                                <i class="fab fa-pinterest"></i>
+                            </div>
+                            <div class="app-name">Pinterest</div>
+                            <div class="app-handle">Jalal Designs</div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+            
+            <footer class="footer">
+                <div class="footer-content">
+                    <div class="copyright">© 2023 جلال. جميع الحقوق محفوظة.</div>
+                    <a href="#" class="website-url">jalal-dev.com</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            const starCount = 120;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2.5 + 1;
+                const duration = Math.random() * 3 + 2;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.opacity = Math.random() * 0.7 + 0.3;
+                
+                container.appendChild(star);
+            }
+        }
+        
+        function initModal() {
+            const modal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalClose = document.getElementById('modal-close');
+            const banner = document.getElementById('banner');
+            const profileImg = document.getElementById('profile-img');
+            
+            function openModal(imgSrc) {
+                modalImage.src = imgSrc;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeModal() {
+                modal.classList.remove('active');
+                setTimeout(() => {
+                    modalImage.src = '';
+                }, 300);
+                document.body.style.overflow = 'auto';
+            }
+            
+            banner.addEventListener('click', () => {
+                openModal('https://iili.io/fb6SvS9.md.jpg');
+            });
+            
+            profileImg.addEventListener('click', () => {
+                openModal('https://iili.io/fb64ziv.md.jpg');
+            });
+            
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        }
+        
+        function initLinks() {
+            const links = document.querySelectorAll('.link-app');
+            
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size/2;
+                    const y = e.clientY - rect.top - size/2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255,7,58,0.3);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to { transform: scale(4); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        function showNotification(message) {
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+            
+            const notif = document.createElement('div');
+            notif.className = 'notification';
+            notif.textContent = message;
+            notif.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: rgba(10, 10, 10, 0.95);
+                color: var(--neon-red);
+                padding: 12px 24px;
+                border-radius: 10px;
+                border: 1px solid rgba(255, 7, 58, 0.3);
+                backdrop-filter: blur(10px);
+                z-index: 10000;
+                animation: slideIn 0.3s ease;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                font-weight: 500;
+            `;
+            
+            document.body.appendChild(notif);
+            
+            setTimeout(() => {
+                notif.style.animation = 'slideOut 0.3s ease forwards';
+                setTimeout(() => notif.remove(), 300);
+            }, 3000);
+            
+            const animStyle = document.createElement('style');
+            animStyle.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                @keyframes slideOut {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(animStyle);
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            initModal();
+            initLinks();
+        });
+        
+        window.addEventListener('resize', () => {
+            const stars = document.getElementById('stars-container');
+            stars.innerHTML = '';
+            createStars();
+        });
+    </script>
+</body>
+</html>
