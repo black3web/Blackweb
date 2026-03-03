@@ -2,226 +2,157 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JlAl WEB</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ㅤ𝑇𝑅⁷ㅤ</title>
+    <meta name="description" content="مبرمج مستقل ">
+    <meta property="og:title" content="جلال — مبرمج ويب">
+    <meta property="og:description" content="مصمم ويب">
+    <meta property="og:image" content="https://iili.io/fb6SvS9.md.jpg">
+    <meta name="theme-color" content="#0a0a0a">
+    
+    <!-- خطوط حادة ومزخرفة -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700;900&family=Cairo:wght@400;700;900&family=Inter:wght@600;800;900&family=Playfair+Display:wght@700;900&family=Tajawal:wght@500;700;900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, -apple-system, 'Tajawal', sans-serif;
         }
 
         :root {
-            --primary-black: #0a0a0a;
-            --primary-red: #8b0000;
-            --neon-red: #ff073a;
-            --neon-dark-red: #b30000;
-            --glass-bg: rgba(10, 10, 10, 0.85);
-            --glass-border: rgba(255, 7, 58, 0.25);
-            --glow-red: rgba(255, 7, 58, 0.7);
+            --black-deep: #030101;
+            --black-neon: #1a0c0c;
+            --red-deep: #4a0000;
+            --red-neon: #ff1a1a;
+            --glass-bg: rgba(3, 1, 1, 0.4); /* أكثر شفافية */
+            --glass-border: rgba(255, 26, 26, 0.25);
             --text-primary: #ffffff;
-            --text-secondary: #f0f0f0;
-            --shadow-deep: 0 20px 40px rgba(0, 0, 0, 0.7);
+            --text-secondary: #e0e0e0;
+            --font-arabic: 'Tajawal', 'Cairo', 'Amiri', sans-serif;
+            --font-english: 'Inter', 'Playfair Display', serif;
         }
 
-        body {
-            background: var(--primary-black);
-            color: var(--text-primary);
+        html, body {
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
+            background: var(--black-deep);
+            color: var(--text-primary);
+            font-family: var(--font-arabic);
             overflow-x: hidden;
-            position: relative;
-            background-image: 
-                radial-gradient(circle at 20% 80%, rgba(139, 0, 0, 0.2) 0%, transparent 40%),
-                radial-gradient(circle at 80% 20%, rgba(255, 7, 58, 0.15) 0%, transparent 40%),
-                linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
         }
 
-        .geometric-background {
+        /* خلفية canvas محسنة بتموجات مائية */
+        #canvas-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
             z-index: 1;
-            opacity: 0.4;
-            background-image: 
-                repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255, 7, 58, 0.05) 20px, rgba(255, 7, 58, 0.05) 40px),
-                repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(139, 0, 0, 0.05) 30px, rgba(139, 0, 0, 0.05) 60px);
-        }
-
-        #stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             pointer-events: none;
-            z-index: 2;
-        }
-
-        .star {
-            position: absolute;
-            background: var(--neon-red);
-            border-radius: 50%;
-            animation: twinkle var(--duration) infinite alternate;
-            box-shadow: 0 0 8px var(--neon-red);
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .light-beam {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .beam {
-            position: absolute;
-            width: 300px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-red), transparent);
-            filter: blur(1px);
-            animation: beamMove 8s linear infinite;
-        }
-
-        .beam:nth-child(1) { top: 20%; animation-delay: 0s; }
-        .beam:nth-child(2) { top: 40%; animation-delay: 2s; }
-        .beam:nth-child(3) { top: 60%; animation-delay: 4s; }
-        .beam:nth-child(4) { top: 80%; animation-delay: 6s; }
-
-        @keyframes beamMove {
-            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateX(100vw) rotate(45deg); opacity: 0; }
         }
 
         .container {
-            max-width: 1100px;
-            width: 100%;
-            margin: 2rem auto;
             position: relative;
             z-index: 10;
+            max-width: 1100px;
+            width: 95%;
+            margin: 2rem auto;
+            min-height: calc(100vh - 4rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
+        /* النافذة الزجاجية - شفافية عالية مع تأثير سماء المجرات في الخلفية */
         .glass-bubble {
-            background: var(--glass-bg);
-            backdrop-filter: blur(25px);
-            border-radius: 28px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 
-                var(--shadow-deep),
-                inset 0 0 80px rgba(139, 0, 0, 0.15),
-                inset 0 0 40px rgba(255, 7, 58, 0.1),
-                0 0 50px rgba(255, 7, 58, 0.2);
-            overflow: hidden;
             position: relative;
-            animation: bubbleFloat 6s ease-in-out infinite;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 32px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 30px 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+            width: 100%;
+            animation: cinematicFloat 14s infinite ease-in-out;
         }
 
-        @keyframes bubbleFloat {
-            0%, 100% { transform: translateY(0) rotate(0.2deg); }
-            50% { transform: translateY(-8px) rotate(-0.2deg); }
-        }
-
+        /* طبقة خلفية متحركة داخل الفقاعة (سماء مجرات) */
         .glass-bubble::before {
             content: '';
             position: absolute;
-            inset: 0;
-            border-radius: 28px;
-            padding: 2px;
-            background: linear-gradient(135deg, var(--neon-red), transparent 30%, transparent 70%, var(--primary-red));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,26,26,0.1) 0%, transparent 30%),
+                        radial-gradient(circle at 70% 80%, rgba(255,26,26,0.15) 0%, transparent 35%),
+                        repeating-linear-gradient(45deg, rgba(255,26,26,0.02) 0px, rgba(255,26,26,0.02) 2px, transparent 2px, transparent 8px);
+            animation: galaxyMove 40s infinite linear;
+            z-index: -1;
             pointer-events: none;
-            animation: borderGlow 3s ease-in-out infinite alternate;
         }
 
-        @keyframes borderGlow {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
+        @keyframes galaxyMove {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(3%, 2%) rotate(1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
         }
 
+        @keyframes cinematicFloat {
+            0% { transform: translateY(0) scale(1); }
+            25% { transform: translateY(-6px) scale(1.002); }
+            50% { transform: translateY(4px) scale(0.998); }
+            75% { transform: translateY(-2px) scale(1.001); }
+            100% { transform: translateY(0) scale(1); }
+        }
+
+        /* البانر */
         .banner-container {
             width: 100%;
-            height: 320px;
+            height: 260px;
             overflow: hidden;
             position: relative;
+            border-radius: 32px 32px 20px 20px;
         }
 
         .banner {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(1.05) contrast(1.1);
-            transition: transform 8s ease;
+            filter: brightness(0.9) contrast(1.1);
+            display: block;
+            animation: bannerDolly 30s infinite alternate;
         }
 
-        .banner-container:hover .banner {
-            transform: scale(1.04);
+        @keyframes bannerDolly {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.06); }
         }
 
-        .banner-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 1.2rem;
-            background: linear-gradient(transparent, rgba(10, 10, 10, 0.8));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .banner-text {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(10, 10, 10, 0.5);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 7, 58, 0.2);
-        }
-
+        /* صورة شخصية - تعديل وضعها للأسفل في الجوال */
         .profile-section {
             position: relative;
-            margin-top: -80px;
-            margin-bottom: 1.5rem;
+            margin-top: -45px;
+            margin-bottom: 1rem;
             display: flex;
             justify-content: center;
             z-index: 20;
         }
 
         .profile-img-container {
-            width: 160px;
-            height: 160px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            padding: 3px;
-            background: linear-gradient(135deg, var(--neon-red), var(--primary-red));
-            position: relative;
-            animation: profileGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes profileGlow {
-            0% { box-shadow: 0 0 25px var(--glow-red); }
-            100% { box-shadow: 0 0 40px rgba(255, 7, 58, 0.8); }
+            padding: 2px;
+            background: linear-gradient(145deg, var(--red-neon), var(--red-deep));
+            animation: borderRotate 10s linear infinite, imgFloat 5s infinite;
+            box-shadow: 0 0 15px var(--red-neon);
         }
 
         .profile-img {
@@ -229,171 +160,234 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            filter: brightness(1.05) contrast(1.05);
+            border: 2px solid var(--black-deep);
         }
 
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes imgFloat {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+
+        /* النصوص مع زخرفة وخطوط حادة */
         .profile-info {
             text-align: center;
-            padding: 0 2.5rem 2rem;
+            padding: 0 2rem 1.5rem;
         }
 
         .profile-name {
-            font-size: 2.4rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--neon-red), var(--primary-red));
+            font-size: 2.6rem;
+            font-weight: 900;
+            margin-bottom: 0.2rem;
+            background: linear-gradient(135deg, var(--red-neon), #ff6666);
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-shadow: 0 5px 15px rgba(255, 7, 58, 0.3);
+            color: transparent;
+            font-family: var(--font-english);
+            text-shadow: 0 0 5px rgba(255,26,26,0.3);
+            letter-spacing: 1px;
+            animation: textGlide 6s infinite;
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red-neon), var(--red-deep), transparent);
+            transform: scaleX(0);
+            animation: underlineExpand 4s infinite;
+        }
+
+        @keyframes underlineExpand {
+            0% { transform: scaleX(0); opacity: 0; }
+            50% { transform: scaleX(1); opacity: 1; }
+            100% { transform: scaleX(0); opacity: 0; }
+        }
+
+        @keyframes textGlide {
+            0% { letter-spacing: 0px; }
+            50% { letter-spacing: 2px; }
+            100% { letter-spacing: 0px; }
         }
 
         .profile-title {
-            font-size: 1.1rem;
-            color: var(--neon-red);
+            font-size: 1.2rem;
+            color: var(--red-neon);
             margin-bottom: 1.2rem;
-            font-weight: 500;
+            font-family: var(--font-english);
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 0 0 8px var(--red-neon);
+            animation: titlePulse 3s infinite;
+        }
+
+        @keyframes titlePulse {
+            0% { opacity: 0.9; }
+            50% { opacity: 1; text-shadow: 0 0 15px var(--red-neon); }
+            100% { opacity: 0.9; }
         }
 
         .profile-description {
-            max-width: 750px;
+            max-width: 700px;
             margin: 0 auto;
             font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.8;
             color: var(--text-secondary);
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 18px;
-            border: 1px solid rgba(255, 7, 58, 0.1);
-            backdrop-filter: blur(12px);
+            background: rgba(0,0,0,0.2);
+            border-radius: 24px;
+            border: 1px solid rgba(255,26,26,0.15);
+            font-family: var(--font-arabic);
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            box-shadow: inset 0 0 20px rgba(255,26,26,0.1);
         }
 
+        /* شبكة الروابط */
         .links-section {
-            padding: 0 2.5rem 2.5rem;
+            padding: 0 2rem 2rem;
         }
 
         .links-title {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 2rem;
             margin-bottom: 2rem;
-            color: var(--text-primary);
+            font-family: var(--font-english);
+            color: var(--red-neon);
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
-            padding-bottom: 0.5rem;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 800;
+            text-shadow: 0 0 10px var(--red-neon);
+        }
+
+        .links-title::before,
+        .links-title::after {
+            content: '♕';
+            color: var(--red-neon);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.5; transform: scale(1); }
         }
 
         .links-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--neon-red), var(--primary-red), transparent);
-            border-radius: 1px;
+            content: '♕';
+            animation-delay: 1s;
         }
 
         .links-grid {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
             gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .links-row {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            flex-wrap: wrap;
+            justify-items: center;
         }
 
         .link-app {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 7, 58, 0.15);
-            border-radius: 16px;
-            padding: 1.2rem 1rem;
+            background: rgba(10, 10, 10, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 26, 26, 0.15);
+            border-radius: 24px;
+            padding: 1.2rem 0.3rem;
             text-align: center;
-            transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-            width: 160px;
+            width: 100%;
+            max-width: 150px;
+            transition: transform 0.3s;
+            animation: cardWave 8s infinite ease-in-out;
         }
 
-        .link-app::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 7, 58, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s ease;
-            opacity: 0;
+        @keyframes cardWave {
+            0% { transform: translateY(0) rotate(0deg); }
+            20% { transform: translateY(-6px) rotate(0.8deg); }
+            40% { transform: translateY(4px) rotate(-0.6deg); }
+            60% { transform: translateY(-3px) rotate(0.4deg); }
+            80% { transform: translateY(2px) rotate(-0.2deg); }
+            100% { transform: translateY(0) rotate(0deg); }
         }
 
-        .link-app:hover {
-            transform: translateY(-4px);
-            border-color: rgba(255, 7, 58, 0.4);
-            box-shadow: 
-                0 8px 20px rgba(0, 0, 0, 0.3),
-                0 0 25px rgba(255, 7, 58, 0.25);
-        }
-
-        .link-app:hover::before {
-            opacity: 1;
-            transform: rotate(45deg) translate(20%, 20%);
-        }
+        .link-app:nth-child(odd) { animation-delay: -2s; }
+        .link-app:nth-child(even) { animation-delay: -4s; }
 
         .app-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 10px;
+            width: 55px;
+            height: 55px;
+            border-radius: 18px;
+            background: linear-gradient(145deg, var(--red-deep), #220000);
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 0.8rem;
-            font-size: 1.2rem;
-            background: linear-gradient(135deg, var(--neon-red), var(--primary-red));
-            color: white;
-            position: relative;
-            z-index: 2;
-            transition: all 0.3s ease;
+            font-size: 1.8rem;
+            color: var(--red-neon);
+            box-shadow: 0 5px 15px rgba(255,26,26,0.3);
+            transition: 0.3s;
+            animation: iconBounce 3s infinite ease-in-out;
+        }
+
+        @keyframes iconBounce {
+            0% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-8px) scale(1.1); }
+            50% { transform: translateY(0) scale(1); }
+            70% { transform: translateY(-4px) scale(1.05); }
+            100% { transform: translateY(0) scale(1); }
         }
 
         .link-app:hover .app-icon {
-            transform: scale(1.08) rotate(3deg);
+            animation: none;
+            transform: scale(1.15) rotate(5deg);
+            background: linear-gradient(145deg, var(--red-neon), #990000);
+            color: black;
+            box-shadow: 0 0 30px var(--red-neon);
         }
 
         .app-name {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
+            font-size: 0.95rem;
+            font-weight: 700;
             color: var(--text-primary);
-            position: relative;
-            z-index: 2;
+            font-family: var(--font-english);
+            margin-bottom: 0.2rem;
         }
 
         .app-handle {
             font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.7);
-            position: relative;
-            z-index: 2;
+            color: #ddd;
+            background: rgba(0,0,0,0.5);
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,26,26,0.2);
         }
 
+        .link-app:hover {
+            border-color: rgba(255,26,26,0.4);
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        /* تذييل */
         .footer {
             text-align: center;
-            padding: 2rem 2.5rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.6);
+            padding: 1.5rem 2rem;
+            border-top: 1px solid rgba(255,26,26,0.2);
         }
 
         .footer-content {
@@ -401,46 +395,51 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 0.8rem;
         }
 
         .copyright {
             font-size: 0.85rem;
+            color: #ccc;
+            font-weight: 500;
         }
 
         .website-url {
-            color: var(--neon-red);
+            color: var(--red-neon);
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            background: rgba(255, 7, 58, 0.1);
-            border: 1px solid rgba(255, 7, 58, 0.2);
+            padding: 0.4rem 1.5rem;
+            border-radius: 30px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,26,26,0.3);
             font-size: 0.9rem;
+            transition: 0.3s;
+            font-family: var(--font-english);
+            font-weight: 600;
+            backdrop-filter: blur(5px);
         }
 
         .website-url:hover {
-            background: rgba(255, 7, 58, 0.2);
-            color: white;
-            box-shadow: 0 0 15px rgba(255, 7, 58, 0.3);
+            background: rgba(255,26,26,0.15);
+            border-color: var(--red-neon);
+            box-shadow: 0 0 20px var(--red-neon);
         }
 
+        /* مودال */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
             z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
 
         .modal-overlay.active {
@@ -449,12 +448,13 @@
         }
 
         .modal-image {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            box-shadow: 0 0 50px rgba(255, 7, 58, 0.5);
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 20px;
+            border: 2px solid var(--red-neon);
+            box-shadow: 0 0 30px rgba(255,26,26,0.5);
             transform: scale(0.9);
-            transition: transform 0.3s ease;
+            transition: 0.3s;
         }
 
         .modal-overlay.active .modal-image {
@@ -463,407 +463,240 @@
 
         .modal-close {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            background: rgba(255, 255, 255, 0.1);
-            width: 50px;
-            height: 50px;
+            top: 20px;
+            left: 20px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
+            background: rgba(0,0,0,0.7);
+            color: var(--red-neon);
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            font-size: 1.8rem;
+            cursor: pointer;
+            border: 1px solid var(--red-neon);
+            transition: 0.3s;
         }
 
         .modal-close:hover {
-            background: rgba(255, 7, 58, 0.3);
+            background: var(--red-neon);
+            color: black;
             transform: rotate(90deg);
         }
 
-        @media (max-width: 768px) {
-            .container {
-                margin: 1rem auto;
-            }
-            
-            .glass-bubble {
-                border-radius: 22px;
-            }
-            
-            .banner-container {
-                height: 240px;
-            }
-            
-            .profile-img-container {
-                width: 140px;
-                height: 140px;
-            }
-            
-            .profile-section {
-                margin-top: -70px;
-            }
-            
-            .profile-info {
-                padding: 0 1.5rem 1.5rem;
-            }
-            
-            .profile-name {
-                font-size: 2rem;
-            }
-            
-            .profile-description {
-                padding: 1.2rem;
-                font-size: 0.95rem;
-            }
-            
-            .links-section {
-                padding: 0 1.5rem 1.5rem;
-            }
-            
-            .links-row {
-                gap: 1rem;
-            }
-            
-            .link-app {
-                width: 140px;
-                padding: 1rem 0.8rem;
-            }
-            
-            .app-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 1.1rem;
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .banner-container {
-                height: 200px;
-            }
-            
-            .profile-img-container {
-               width: 120px;
-                height: 120px;
-            }
-            
-            .profile-section {
-                margin-top: -60px;
-            }
-            
-            .profile-name {
-                font-size: 1.8rem;
-            }
-            
-            .links-row {
-                justify-content: space-around;
-            }
-            
-            .link-app {
-                width: 130px;
-                padding: 0.9rem 0.6rem;
-            }
-            
-            .app-icon {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
-        }
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(var(--neon-red), var(--primary-red));
-            border-radius: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(var(--primary-red), var(--neon-red));
+        /* تحسينات الجوال */
+        @media (max-width: 600px) {
+            .container { width: 98%; margin: 1rem auto; }
+            .glass-bubble { border-radius: 24px; }
+            .banner-container { height: 180px; }
+            .profile-section { margin-top: -30px; } /* أنزل للأسفل */
+            .profile-img-container { width: 75px; height: 75px; }
+            .profile-name { font-size: 2rem; }
+            .profile-description { font-size: 0.9rem; padding: 1rem; }
+            .links-grid { gap: 1rem; }
+            .link-app { max-width: 130px; padding: 1rem 0.2rem; }
+            .app-icon { width: 50px; height: 50px; font-size: 1.6rem; }
+            .footer-content { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <div class="geometric-background"></div>
-    <div id="stars-container"></div>
-    <div class="light-beam">
-        <div class="beam"></div>
-        <div class="beam"></div>
-        <div class="beam"></div>
-        <div class="beam"></div>
-    </div>
-    
-    <div class="modal-overlay" id="image-modal">
-        <div class="modal-close" id="modal-close">
-            <i class="fas fa-times"></i>
-        </div>
+
+    <canvas id="canvas-bg"></canvas>
+
+    <div class="modal-overlay" id="image-modal" role="dialog" aria-hidden="true">
+        <div class="modal-close" id="modal-close"><i class="fas fa-times"></i></div>
         <img src="" alt="" class="modal-image" id="modal-image">
     </div>
-    
+
     <div class="container">
         <div class="glass-bubble">
             <div class="banner-container" id="banner">
-                <img src="https://iili.io/fb6SvS9.md.jpg" alt="بنر" class="banner">
-                <div class="banner-overlay">
-                    <div class="banner-text">
-                        <i class="fas fa-expand-alt"></i>
-                        انقر
-                    </div>
-                </div>
+                <img src="https://iili.io/fb6SvS9.md.jpg" alt="banner" class="banner" loading="eager">
             </div>
-            
+
             <div class="profile-section">
                 <div class="profile-img-container" id="profile-img">
-                    <img src="https://iili.io/fb64ziv.md.jpg" alt="صورة" class="profile-img">
+                    <img src="https://iili.io/fb64ziv.md.jpg" alt="profile" class="profile-img">
                 </div>
             </div>
-            
+
             <section class="profile-info">
-                <h1 class="profile-name">• جـلال ♕</h1>
-                <p class="profile-title">• TR7 •</p>
-                <p class="profile-description">
-                    مطور ويب محترف مستقل، متخصص في إنشاء تطبيقات ويب حديثة ومبتكرة.  
-أعمل على أدوات البرمجة، وصنع التطبيقات والألعاب، مع خبرة واسعة في المجال.  
-جميع المشاريع، التحديثات، وتطويرات جديدة منشورة على قناة تيليجرام الخاصة بي.  
-هدفي هو إيصال إبداعاتي إلى أكبر عدد من الناس وتطوير مشاريع جديدة باستمرار.
+                <h1 class="profile-name">جلال ♕</h1>
+                <p class="profile-title">مطور ويب مستقل</p>
+                <p class="profile-description"> 
+مطور ويب محترف متخصص في إنشاء تطبيقات ويب حديثة ومبتكرة. أمتلك خبرة واسعة في تطوير حلول تقنية متكاملة تركز على تجربة المستخدم والأداء العالي. أهدف دائماً إلى دمج الجمالية مع الوظيفة في كل مشروع أقوم به.
                 </p>
             </section>
-            
+
             <section class="links-section">
-                <h2 class="links-title">التواصل</h2>
+                <h2 class="links-title">تواصل</h2>
                 <div class="links-grid">
-                    <div class="links-row">
-                        <a href="https://t.me/szc_v" target="_blank" class="link-app">
-                            <div class="app-icon">
-                                <i class="fab fa-telegram"></i>
-                            </div>
-                            <div class="app-name">Telegram</div>
-                            <div class="app-handle">جـلال</div>
-                        </a>
-                        
-                        <a href="https://t.me/swc_t" target="_blank" class="link-app">
-                            <div class="app-icon">
-                                <i class="fab fa-telegram-plane"></i>
-                            </div>
-                            <div class="app-name">Channel</div>
-                            <div class="app-handle">إيليا</div>
-                        </a>
-                    </div>
-                    
-                    <div class="links-row">
-                        <a href="https://youtube.com/@scv_t?si=RzJSaXKo492YlmzU" target="_blank" class="link-app">
-                            <div class="app-icon">
-                                <i class="fab fa-youtube"></i>
-                            </div>
-                            <div class="app-name">YouTube</div>
-                            <div class="app-handle">scv_t</div>
-                        </a>
-                        
-                        <a href="https://www.instagram.com/szc2v?igsh=Z3VobDdscTFldGZ0" target="_blank" class="link-app">
-                            <div class="app-icon">
-                                <i class="fab fa-instagram"></i>
-                            </div>
-                            <div class="app-name">Instagram</div>
-                            <div class="app-handle">@szc2v</div>
-                        </a>
-                        
-                        <a href="https://pin.it/41EQVI1bs" target="_blank" class="link-app">
-                            <div class="app-icon">
-                                <i class="fab fa-pinterest"></i>
-                            </div>
-                            <div class="app-name">Pinterest</div>
-                            <div class="app-handle">JLAL</div>
-                        </a>
-                    </div>
+                    <a href="https://t.me/ILYA3bot" target="_blank" class="link-app">
+                        <div class="app-icon"><i class="fab fa-telegram"></i></div>
+                        <div class="app-name">Telegram</div>
+                        <div class="app-handle">@ILYA3bot</div>
+                    </a>
+                    <a href="https://t.me/swc_t" target="_blank" class="link-app">
+                        <div class="app-icon"><i class="fab fa-telegram-plane"></i></div>
+                        <div class="app-name">Channel</div>
+                        <div class="app-handle">@swc_t</div>
+                    </a>
+                    <a href="https://youtube.com/@scv_t" target="_blank" class="link-app">
+                        <div class="app-icon"><i class="fab fa-youtube"></i></div>
+                        <div class="app-name">YouTube</div>
+                        <div class="app-handle">@scv_t</div>
+                    </a>
+                    <a href="https://www.instagram.com/szc2v" target="_blank" class="link-app">
+                        <div class="app-icon"><i class="fab fa-instagram"></i></div>
+                        <div class="app-name">Instagram</div>
+                        <div class="app-handle">@szc2v</div>
+                    </a>
+                    <a href="https://pin.it/41EQVI1bs" target="_blank" class="link-app">
+                        <div class="app-icon"><i class="fab fa-pinterest"></i></div>
+                        <div class="app-name">Pinterest</div>
+                        <div class="app-handle">JLAL</div>
+                    </a>
                 </div>
             </section>
-            
+
             <footer class="footer">
                 <div class="footer-content">
-                    <div class="copyright">© 2026 جميع الحقوق محفوظة لـ مبرمج جـلال</div>
-                    <a href="#" class="website-url">https://black3web.github.io/Blackweb/</a>
+                    <div class="copyright">جميع الحقوق لمبرمج جـلال 2026 ©</div>
+                    <a href="#" class="website-url">black3web.github.io</a>
                 </div>
             </footer>
         </div>
     </div>
 
     <script>
-        function createStars() {
-            const container = document.getElementById('stars-container');
-            const starCount = 120;
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
-                const size = Math.random() * 2.5 + 1;
-                const duration = Math.random() * 3 + 2;
-                
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.setProperty('--duration', `${duration}s`);
-                star.style.opacity = Math.random() * 0.7 + 0.3;
-                
-                container.appendChild(star);
+        (function() {
+            "use strict";
+
+            // خلفية Canvas بتموجات مائية واقعية وخطوط نيونية
+            const canvas = document.getElementById('canvas-bg');
+            const ctx = canvas.getContext('2d');
+            let w, h;
+            let particles = [];
+            let waves = [];
+
+            function initCanvas() {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                canvas.width = w;
+                canvas.height = h;
+
+                // جسيمات نجوم (خفيفة)
+                particles = [];
+                for (let i = 0; i < 100; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        r: Math.random() * 2 + 0.5,
+                        vx: (Math.random() - 0.5) * 0.1,
+                        vy: (Math.random() - 0.5) * 0.1,
+                    });
+                }
+
+                // موجات مائية متعددة
+                for (let i = 0; i < 5; i++) {
+                    waves.push({
+                        amplitude: 15 + Math.random() * 20,
+                        frequency: 0.005 + Math.random() * 0.01,
+                        speed: 0.02 + Math.random() * 0.03,
+                        phase: Math.random() * Math.PI * 2,
+                        yBase: h * (0.2 + i * 0.15),
+                        color: `rgba(255, ${50 + i*30}, 100, 0.12)`,
+                    });
+                }
             }
-        }
-        
-        function initModal() {
+
+            function draw() {
+                ctx.clearRect(0, 0, w, h);
+                
+                // خلفية سوداء عميقة
+                ctx.fillStyle = '#030101';
+                ctx.fillRect(0, 0, w, h);
+
+                // رسم النجوم
+                ctx.fillStyle = '#ff4d4d';
+                for (let p of particles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+                }
+
+                // رسم تموجات مائية (أمواج جيبية متحركة)
+                ctx.lineWidth = 1.2;
+                ctx.shadowBlur = 0;
+                const time = Date.now() * 0.002;
+                for (let wave of waves) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = wave.color;
+                    for (let x = 0; x <= w; x += 15) {
+                        let y = wave.yBase + wave.amplitude * Math.sin(x * wave.frequency + time * wave.speed + wave.phase);
+                        if (x === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.stroke();
+                }
+
+                // خطوط نيونية رفيعة إضافية
+                ctx.strokeStyle = 'rgba(255, 20, 20, 0.08)';
+                ctx.lineWidth = 0.8;
+                for (let i = 0; i < 4; i++) {
+                    let y = (Math.sin(time * 0.5 + i) * 40 + h * 0.3 + i * 70) % h;
+                    ctx.beginPath();
+                    ctx.moveTo(0, y);
+                    for (let x = 0; x <= w; x += 30) {
+                        ctx.lineTo(x, y + 15 * Math.sin(x * 0.01 + time * 2));
+                    }
+                    ctx.stroke();
+                }
+
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', () => { initCanvas(); });
+            initCanvas();
+            draw();
+
+            // مودال الصور
             const modal = document.getElementById('image-modal');
-            const modalImage = document.getElementById('modal-image');
+            const modalImg = document.getElementById('modal-image');
             const modalClose = document.getElementById('modal-close');
             const banner = document.getElementById('banner');
-            const profileImg = document.getElementById('profile-img');
-            
-            function openModal(imgSrc) {
-                modalImage.src = imgSrc;
+            const profile = document.getElementById('profile-img');
+            let lastFocus;
+
+            function openModal(src, el) {
+                modalImg.src = src;
                 modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+                lastFocus = el;
                 document.body.style.overflow = 'hidden';
             }
-            
+
             function closeModal() {
                 modal.classList.remove('active');
-                setTimeout(() => {
-                    modalImage.src = '';
-                }, 300);
-                document.body.style.overflow = 'auto';
+                modal.setAttribute('aria-hidden', 'true');
+                if (lastFocus) lastFocus.focus();
+                document.body.style.overflow = '';
             }
-            
-            banner.addEventListener('click', () => {
-                openModal('https://iili.io/fb6SvS9.md.jpg');
-            });
-            
-            profileImg.addEventListener('click', () => {
-                openModal('https://iili.io/fb64ziv.md.jpg');
-            });
-            
+
+            banner.addEventListener('click', () => openModal('https://iili.io/fb6SvS9.md.jpg', banner));
+            profile.addEventListener('click', () => openModal('https://iili.io/fb64ziv.md.jpg', profile));
             modalClose.addEventListener('click', closeModal);
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-            
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    closeModal();
-                }
-            });
-        }
-        
-        function initLinks() {
-            const links = document.querySelectorAll('.link-app');
-            
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    
-                    const ripple = document.createElement('span');
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size/2;
-                    const y = e.clientY - rect.top - size/2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255,7,58,0.3);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        width: ${size}px;
-                        height: ${size}px;
-                        top: ${y}px;
-                        left: ${x}px;
-                        pointer-events: none;
-                    `;
-                    
-                    this.appendChild(ripple);
-                    setTimeout(() => ripple.remove(), 600);
-                });
-            });
-            
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple {
-                    to { transform: scale(4); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(style);
-        }
-        
-        function showNotification(message) {
-            const existing = document.querySelector('.notification');
-            if (existing) existing.remove();
-            
-            const notif = document.createElement('div');
-            notif.className = 'notification';
-            notif.textContent = message;
-            notif.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: rgba(10, 10, 10, 0.95);
-                color: var(--neon-red);
-                padding: 12px 24px;
-                border-radius: 10px;
-                border: 1px solid rgba(255, 7, 58, 0.3);
-                backdrop-filter: blur(10px);
-                z-index: 10000;
-                animation: slideIn 0.3s ease;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-                font-weight: 500;
-            `;
-            
-            document.body.appendChild(notif);
-            
-            setTimeout(() => {
-                notif.style.animation = 'slideOut 0.3s ease forwards';
-                setTimeout(() => notif.remove(), 300);
-            }, 3000);
-            
-            const animStyle = document.createElement('style');
-            animStyle.textContent = `
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes slideOut {
-                    from { transform: translateX(0); opacity: 1; }
-                    to { transform: translateX(100%); opacity: 0; }
-                }
-            `;
-            document.head.appendChild(animStyle);
-        }
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            createStars();
-            initModal();
-            initLinks();
-        });
-        
-        window.addEventListener('resize', () => {
-            const stars = document.getElementById('stars-container');
-            stars.innerHTML = '';
-            createStars();
-        });
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+        })();
     </script>
 </body>
-
 </html>
-
-
-
