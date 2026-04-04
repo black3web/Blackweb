@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+  <title>ㅤ𝑇𝑅⁷ㅤ</title>
+  <link rel="icon" href="https://iili.io/qWN5VvR.md.jpg" type="image/jpeg">
+  <meta name="description" content="مطور ويب متخصص في أنظمة تفاعلية عالية الأداء">
+  <meta property="og:title" content="جلال — مهندس ويب">
+  <meta property="og:description" content="حلول ويب فائقة الجودة وتجارب مستخدم تفاعلية">
+  <meta property="og:image" content="https://iili.io/qWN5VvR.md.jpg">
+  <meta property="og:url" content="https://black3web.github.io/Blackweb/">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#040101">
+  <meta name="color-scheme" content="dark">
+  <link rel="preload" as="image" href="https://iili.io/fb6SvS9.md.jpg">
+  <link rel="preload" as="image" href="https://iili.io/fb64ziv.md.jpg">
+  <link rel="preload" as="image" href="https://iili.io/qWN5VvR.md.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Tajawal:wght@400;500;700;900&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader" role="status" aria-label="جاري التحميل">
+  <div class="loader-inner">
+    <div class="loader-orbit-wrap" aria-hidden="true">
+      <svg viewBox="0 0 220 220" class="loader-orbit-svg">
+        <defs>
+          <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#ff0033" stop-opacity="0"/>
+            <stop offset="40%"  stop-color="#ff0033" stop-opacity="1"/>
+            <stop offset="75%"  stop-color="#ff3355" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ffffff"  stop-opacity="0.85"/>
+          </linearGradient>
+          <linearGradient id="lg2" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%"   stop-color="#cc001a" stop-opacity="0"/>
+            <stop offset="50%"  stop-color="#cc001a" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#cc001a" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="glow1" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <!-- Base rings -->
+        <circle cx="110" cy="110" r="102" fill="none" stroke="rgba(180,0,20,0.1)" stroke-width="0.8"/>
+        <circle cx="110" cy="110" r="80"  fill="none" stroke="rgba(180,0,20,0.08)" stroke-width="0.6"/>
+        <!-- Animated comet outer -->
+        <circle cx="110" cy="110" r="102" fill="none"
+          stroke="url(#lg1)" stroke-width="3.5" stroke-linecap="round"
+          stroke-dasharray="90 550" filter="url(#glow1)"
+          class="ldr-comet-1"/>
+        <!-- Animated comet outer reverse -->
+        <circle cx="110" cy="110" r="102" fill="none"
+          stroke="url(#lg2)" stroke-width="2" stroke-linecap="round"
+          stroke-dasharray="55 585"
+          class="ldr-comet-2"/>
+        <!-- Animated comet inner -->
+        <circle cx="110" cy="110" r="80" fill="none"
+          stroke="#ff0033" stroke-width="2.5" stroke-linecap="round"
+          stroke-dasharray="40 462" filter="url(#glow1)"
+          class="ldr-comet-3"/>
+      </svg>
+    </div>
+
+    <div class="loader-logo-box">
+      <div class="loader-logo-aura"></div>
+      <img src="https://iili.io/qWN5VvR.md.jpg" alt="شعار" class="loader-logo" loading="eager">
+      <div class="loader-scan"></div>
+      <div class="ldr-corner ldr-c-tl"></div>
+      <div class="ldr-corner ldr-c-tr"></div>
+      <div class="ldr-corner ldr-c-bl"></div>
+      <div class="ldr-corner ldr-c-br"></div>
+    </div>
+
+    <div class="loader-text">
+      <div class="ldr-brand">TR<sup>7</sup></div>
+      <div class="ldr-status" id="ldr-status">INITIALIZING SYSTEM</div>
+    </div>
+
+    <div class="loader-progress">
+      <div class="ldr-bar-wrap">
+        <div class="ldr-bar-fill" id="loader-bar"></div>
+        <div class="ldr-bar-head" id="ldr-head"></div>
+      </div>
+      <div class="ldr-pct" id="ldr-pct">0<span>%</span></div>
+    </div>
+
+    <!-- HUD brackets -->
+    <div class="ldr-hud-tl"></div>
+    <div class="ldr-hud-tr"></div>
+    <div class="ldr-hud-bl"></div>
+    <div class="ldr-hud-br"></div>
+  </div>
+</div>
+
+<!-- CANVAS BG -->
+<canvas id="canvas-bg"></canvas>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="img-modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="modal-close" id="modal-close" tabindex="0" role="button" aria-label="إغلاق">
+    <i class="fas fa-times"></i>
+  </div>
+  <div class="modal-frame">
+    <img src="" alt="صورة مكبرة" class="modal-img" id="modal-img">
+    <div class="mf-corner mf-tl"></div>
+    <div class="mf-corner mf-tr"></div>
+    <div class="mf-corner mf-bl"></div>
+    <div class="mf-corner mf-br"></div>
+  </div>
+</div>
+
+<!-- MAIN PAGE -->
+<div class="page-wrap">
+  <div class="glass-card" id="main-card">
+
+    <!-- Card orbit decoration -->
+    <div class="card-orbit-wrap" aria-hidden="true">
+      <svg class="card-orbit-svg" viewBox="0 0 100 100" preserveAspectRatio="none" overflow="visible">
+        <defs>
+          <linearGradient id="co1" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#ff0033" stop-opacity="0"/>
+            <stop offset="50%"  stop-color="#ff0033" stop-opacity="1"/>
+            <stop offset="100%" stop-color="#ff3355" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="co2" x1="100%" y1="0%" x2="0%" y2="0%">
+            <stop offset="0%"   stop-color="#990011" stop-opacity="0"/>
+            <stop offset="50%"  stop-color="#990011" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#990011" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect x="0.5" y="0.5" width="99" height="99" rx="4.5" fill="none"
+          stroke="url(#co1)" stroke-width="0.6"
+          stroke-dasharray="28 272"
+          class="co-cw"/>
+        <rect x="0.5" y="0.5" width="99" height="99" rx="4.5" fill="none"
+          stroke="url(#co2)" stroke-width="0.4"
+          stroke-dasharray="18 282"
+          class="co-ccw"/>
+      </svg>
+    </div>
+
+    <!-- Scanlines -->
+    <div class="scanlines" aria-hidden="true"></div>
+    <!-- Grain -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <!-- HUD corners on main card -->
+    <div class="card-hud card-hud-tl" aria-hidden="true"></div>
+    <div class="card-hud card-hud-tr" aria-hidden="true"></div>
+    <div class="card-hud card-hud-bl" aria-hidden="true"></div>
+    <div class="card-hud card-hud-br" aria-hidden="true"></div>
+
+    <!-- BANNER -->
+    <div class="banner-wrap" id="banner-wrap" role="button" tabindex="0" aria-label="تكبير صورة الغلاف">
+      <img src="https://iili.io/fb6SvS9.md.jpg" alt="غلاف الموقع" class="banner-img" loading="eager">
+      <div class="banner-vignette"></div>
+      <div class="banner-gradient-bot"></div>
+      <div class="banner-hud" aria-hidden="true">
+        <span class="bhud-pulse"></span>
+        <span class="bhud-label">COVER PHOTO</span>
+      </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div class="profile-section">
+      <div class="profile-wrap" id="profile-wrap" role="button" tabindex="0" aria-label="تكبير الصورة الشخصية">
+        <!-- Orbit rings -->
+        <div class="po po1" aria-hidden="true">
+          <svg viewBox="0 0 170 170" overflow="visible">
+            <defs>
+              <linearGradient id="po1g" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%"   stop-color="#ff0033" stop-opacity="0"/>
+                <stop offset="45%"  stop-color="#ff0033" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#ffffff"  stop-opacity="0.8"/>
+              </linearGradient>
+            </defs>
+            <circle cx="85" cy="85" r="79" fill="none" stroke="rgba(200,0,30,0.1)" stroke-width="0.8"/>
+            <circle cx="85" cy="85" r="79" fill="none"
+              stroke="url(#po1g)" stroke-width="2.8" stroke-linecap="round"
+              stroke-dasharray="70 426"
+              class="po-cw"/>
+          </svg>
+        </div>
+        <div class="po po2" aria-hidden="true">
+          <svg viewBox="0 0 170 170" overflow="visible">
+            <defs>
+              <linearGradient id="po2g" x1="100%" y1="100%" x2="0%" y2="0%">
+                <stop offset="0%"   stop-color="#cc001a" stop-opacity="0"/>
+                <stop offset="50%"  stop-color="#cc001a" stop-opacity="1"/>
+                <stop offset="100%" stop-color="#ff3355"  stop-opacity="0.7"/>
+              </linearGradient>
+            </defs>
+            <circle cx="85" cy="85" r="79" fill="none"
+              stroke="url(#po2g)" stroke-width="2" stroke-linecap="round"
+              stroke-dasharray="48 448"
+              class="po-ccw"/>
+          </svg>
+        </div>
+        <div class="profile-aura" aria-hidden="true"></div>
+        <img src="https://iili.io/fb64ziv.md.jpg" alt="جلال" class="profile-img" loading="eager">
+        <div class="profile-shine" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <section class="profile-info">
+      <h1 class="profile-name">
+        <span class="name-glow">جلال</span>
+        <span class="name-underline" aria-hidden="true"></span>
+      </h1>
+      <p class="profile-title">
+        <span class="tb" aria-hidden="true">[ </span>Web Engineer &amp; UI Architect<span class="tb" aria-hidden="true"> ]</span>
+      </p>
+      <div class="desc-box">
+        <div class="desc-top-bar" aria-hidden="true"></div>
+        مطور ويب محترف ومتخصص في دمج حلول الذكاء الاصطناعي مع تطبيقات الويب الحديثة.
+        أمتلك خبرة عميقة في بناء أنظمة تفاعلية عالية الأداء تركز على تجربة المستخدم،
+        وتوظيف تقنيات AI/ML لتقديم تجارب استثنائية.
+        أؤمن بأن الجماليات والوظائف يجب أن تعمل بتناغم تام لخلق منتج رقمي لا يُنسى.
+        <div class="desc-bot-bar" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section class="links-section">
+      <h2 class="section-title">
+        <span class="st-line-l" aria-hidden="true"></span>
+        <span class="st-word">تواصل</span>
+        <span class="st-line-r" aria-hidden="true"></span>
+      </h2>
+      <div class="links-grid">
+
+        <div class="app-card" data-href="https://t.me/ILYA3bot" role="link" tabindex="0" aria-label="تليغرام بوت">
+          <div class="acg"></div>
+          <div class="app-icon ac-tg"><i class="fab fa-telegram"></i></div>
+          <div class="app-name">Telegram</div>
+          <div class="app-handle">@ILYA3bot</div>
+          <div class="ac-shine"></div>
+        </div>
+
+        <div class="app-card" data-href="https://t.me/swc_t" role="link" tabindex="0" aria-label="قناة تليغرام">
+          <div class="acg"></div>
+          <div class="app-icon ac-ch"><i class="fas fa-paper-plane"></i></div>
+          <div class="app-name">Channel</div>
+          <div class="app-handle">@swc_t</div>
+          <div class="ac-shine"></div>
+        </div>
+
+        <div class="app-card" data-href="https://youtube.com/@scv_t" role="link" tabindex="0" aria-label="يوتيوب">
+          <div class="acg"></div>
+          <div class="app-icon ac-yt"><i class="fab fa-youtube"></i></div>
+          <div class="app-name">YouTube</div>
+          <div class="app-handle">@scv_t</div>
+          <div class="ac-shine"></div>
+        </div>
+
+        <div class="app-card" data-href="https://www.instagram.com/szc2v" role="link" tabindex="0" aria-label="انستغرام">
+          <div class="acg"></div>
+          <div class="app-icon ac-ig"><i class="fab fa-instagram"></i></div>
+          <div class="app-name">Instagram</div>
+          <div class="app-handle">@szc2v</div>
+          <div class="ac-shine"></div>
+        </div>
+
+        <div class="app-card" data-href="https://pin.it/41EQVI1bs" role="link" tabindex="0" aria-label="بينترست">
+          <div class="acg"></div>
+          <div class="app-icon ac-pt"><i class="fab fa-pinterest"></i></div>
+          <div class="app-name">Pinterest</div>
+          <div class="app-handle">JLAL</div>
+          <div class="ac-shine"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-divider" aria-hidden="true">
+        <div class="fd-line"></div>
+        <div class="fd-gem">◆</div>
+        <div class="fd-line"></div>
+      </div>
+      <div class="footer-inner">
+        <div class="copyright">
+          <span>© 2026 جلال — جميع الحقوق محفوظة</span>
+          <div class="visitor-badge">
+            <i class="fas fa-eye"></i>
+            <span id="visit-count">0</span>
+            <span class="vb-tag">VISITS</span>
+          </div>
+        </div>
+        <a href="https://black3web.github.io/Blackweb/" target="_blank" class="site-url" rel="noopener noreferrer">
+          <span class="su-arrow">⟶</span>
+          black3web.github.io/Blackweb
+        </a>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
